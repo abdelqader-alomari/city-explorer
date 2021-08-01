@@ -27,20 +27,54 @@ An Application that allow the users to enter the name of city, then provide them
 8/1/2021 3:30 PM - Feature 1: React repository is set up with get API key form LocationIQ and README.md made. and deploy.
 I faced a problem in Ubuntu that when I push that pushed old things from one week it took many iteration's to fix.
 
-8/1/2021 6:35 PM - Feature 2:
+8/1/2021 6:35 PM - Feature 2: Locations: As a user of City Explorer, I want to enter the name of a location so that I can see the exact latitude and longitude of that location.
+
+8/1/2021 7:30 PM - Feature 3: Map: As a user, I want to see a map of the city so that I can see the layout of the area I want to explore.
+
+8/1/2021 8:10 PM - Feature 4: Errors: As a user, I want clear messages if something goes wrong so I know if I need to make any changes or try again in a different manner.
 
 ## Credit and Collaborations
 
-WIth Osaid Al-Homaidy we planned first 15 minutes together
+WIth Osaid Al-Homaidy we planned first 15 minutes together.
 
 ## Time Estimates
 
-Name of feature: **\*\***\*\***\*\***\_\_\_\_**\*\***\*\***\*\***
+Name of feature: Feature #1: Set up your React repository & API keys.
 
-Estimate of time needed to complete: **\_**
+Estimate of time needed to complete: 1 hour
 
-Start time: **\_**
+Start time: 12:30
 
-Finish time: **\_**
+Finish time: 3:30 (I face big problems @ ubuntu.it is pushed commits from week a got! I made many iterations to solve.)
 
-Actual time needed to complete: **\_**
+Actual time needed to complete: 3 hours
+
+Name of feature: Feature #2: Locations: latitude and longitude will be displayed on the page
+
+Estimate of time needed to complete: 2 Hours
+
+Start time: 3:45
+
+Finish time: 6:30
+
+Actual time needed to complete: 2:45 (I face problem with API token key didn't solve, so I make new email and done)
+
+Name of feature: Feature #3: Map: Show the layout of the area that user want to explore.
+
+Estimate of time needed to complete: 45 minutes
+
+Start time: 6:45
+
+Finish time: 7:30
+
+Actual time needed to complete: 45 Minutes
+
+Name of feature: Feature #4: Errors: Show errors for user if something goes wrong.
+
+Estimate of time needed to complete: 1 Hour
+
+Start time: 7:30
+
+Finish time: 8:20
+
+Actual time needed to complete: 50 Minutes
