@@ -19,7 +19,7 @@ class App extends React.Component {
   explore = async (e) => {
     e.preventDefault();
     const cityName = e.target.city.value;
-    const URL = `https://us1.locationiq.com/v1/search.php?key=pk.66676fe625f1ccc2023c8714ea9a1402&q=${cityName}&format=json`;
+    const URL = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_API_TOKEN}&q=${cityName}&format=json`;
 
     try {
       let locationResult = await axios.get(URL);
@@ -34,7 +34,6 @@ class App extends React.Component {
     catch (error) {
       this.setState(
         {
-          showMap: false,
           showErr: true,
           err: `Error: ${error.response.status},${error.response.data.error}`
         }
@@ -77,7 +76,7 @@ class App extends React.Component {
         <div>
           {
             this.state.showMap &&
-            <img width="100%" style={{ maxHeight: "600px" }} src={`https://maps.locationiq.com/v3/staticmap?key=pk.66676fe625f1ccc2023c8714ea9a1402&center=${this.state.lat},${this.state.lon}`} alt='map' />
+            <img width="100%" style={{ maxHeight: "600px" }} src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_TOKEN}&center=${this.state.lat},${this.state.lon}`} alt='map' />
           }
         </div>
         {this.state.showErr ? <p>{this.state.err}</p> : ''}
