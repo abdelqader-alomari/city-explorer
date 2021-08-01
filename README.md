@@ -27,6 +27,8 @@ An Application that allow the users to enter the name of city, then provide them
 8/1/2021 3:30 PM - Feature 1: React repository is set up with get API key form LocationIQ and README.md made. and deploy.
 I faced a problem in Ubuntu that when I push that pushed old things from one week it took many iteration's to fix.
 
+8/1/2021 6:35 PM - Feature 2:
+
 ## Credit and Collaborations
 
 WIth Osaid Al-Homaidy we planned first 15 minutes together

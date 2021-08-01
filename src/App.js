@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, ListGroup, Table } from 'react-bootstrap';
+import { Form, Button, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
 class App extends React.Component {
@@ -27,6 +27,7 @@ class App extends React.Component {
       name: localResult.data[0].display_name,
       lon: localResult.data[0].lon,
       lat: localResult.data[0].lat,
+      showMap: true,
     })
   }
   render() {
@@ -62,8 +63,16 @@ class App extends React.Component {
             </tr>
           </tbody>
         </Table>
+        <div>
+          {
+            this.state.showMap &&
+            <img width="100%" style={{ maxHeight: "600px" }} src={`https://maps.locationiq.com/v3/staticmap?key=pk.66676fe625f1ccc2023c8714ea9a1402&center=${this.state.lat},${this.state.lon}`} alt='map' />
+          }
 
+        </div>
       </div >
+
+
     )
   }
 }
