@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Table, Container, Footer } from 'react-bootstrap';
+import { Form, Button, Table, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
 import Weather from './Weather'
