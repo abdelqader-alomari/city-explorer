@@ -1,7 +1,8 @@
 import React from 'react';
-import { Form, Button, Table } from 'react-bootstrap';
+import { Form, Button, Table, Container, Footer } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
+import Weather from './Weather'
 class App extends React.Component {
 
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends React.Component {
       name: '',
       lon: '',
       lat: '',
+      weather: [],
       err: 'no response',
       showMap: false,
       showErr: false,
@@ -30,6 +32,8 @@ class App extends React.Component {
         showMap: true,
         showErr: false,
       })
+      const weather = await axios.get(`http://localhost:3001/weather?searchQuery=Amman`);
+      this.setState({ weather: weather.data });
     }
     catch (error) {
       this.setState(
@@ -73,16 +77,16 @@ class App extends React.Component {
             </tr>
           </tbody>
         </Table>
+        <Container><Weather weatherData={this.state.weather} cityName={this.state.name} /></Container>
         <div>
           {
+
             this.state.showMap &&
             <img width="100%" style={{ maxHeight: "600px" }} src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_TOKEN}&center=${this.state.lat},${this.state.lon}`} alt='map' />
           }
         </div>
-        {this.state.showErr ? <p>{this.state.err}</p> : ''}
-      </div >
-
-
+        <div className='bg-danger text-white text-center' style={{ fontSize: '25px' }}>{this.state.showErr ? <p>{this.state.err}</p> : ''}</div>
+      </div>
     )
   }
 }
