@@ -15,6 +15,7 @@ class App extends React.Component {
       err: 'no response',
       showMap: false,
       showErr: false,
+      showCards: false,
     }
   }
 
@@ -32,14 +33,15 @@ class App extends React.Component {
         showMap: true,
         showErr: false,
       })
-      const weather = await axios.get(`http://localhost:3001/weather?searchQuery=Amman`);
-      this.setState({ weather: weather.data });
+      const weather = await axios.get(`http://localhost:3001/weather?searchQuery=${cityName}`);
+      this.setState({ weather: weather.data, showCards: true });
     }
     catch (error) {
       this.setState(
         {
           showErr: true,
-          err: `Error: ${error.response.status},${error.response.data.error}`
+          err: `Error: ${error.response.status},${error.response.data.error}`,
+          showCards: false,
         }
       )
     }
@@ -77,7 +79,8 @@ class App extends React.Component {
             </tr>
           </tbody>
         </Table>
-        <Container><Weather weatherData={this.state.weather} cityName={this.state.name} /></Container>
+        <Container>{this.state.showCards &&
+          <Weather weatherData={this.state.weather} cityName={this.state.name} />}</Container>
         <div>
           {
 
