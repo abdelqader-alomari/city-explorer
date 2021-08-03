@@ -10,6 +10,7 @@ class App extends React.Component {
       name: '',
       lon: '',
       lat: '',
+      movies: {},
       err: 'no response',
       showMap: false,
       showErr: false,
