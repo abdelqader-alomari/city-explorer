@@ -13,7 +13,7 @@ class App extends React.Component {
       lon: '',
       lat: '',
       weather: [],
-      movies: {},
+      movies: [],
       err: 'no response',
       showMap: false,
       showErr: false,
@@ -35,11 +35,15 @@ class App extends React.Component {
         showMap: true,
         showErr: false,
       })
-      const weather = await axios.get(`${process.env.REACT_APP_SERVER_URL}/weather?searchQuery=${cityName}&lat=${locationResult.lat}&lon=${locationResult.lon}`
-      );
+    }
+    catch { }
+    try {
+      console.log(this.state.lat)
+      const weather = await axios.get(`${process.env.REACT_APP_PORT}/weather?searchQuery=${cityName}&lat=${this.state.lat}&lon=${this.state.lon}`);
       this.setState({ weather: weather.data, showCards: true });
     }
     catch (error) {
+      console.log(error);
       this.setState(
         {
           showErr: true,
@@ -48,9 +52,10 @@ class App extends React.Component {
         }
       )
     }
-    const movies = await axios.get(`${process.env.REACT_APP_MOVIES_URL}?cityName=${cityName}`
-    );
+    const movies = await axios.get(`${process.env.REACT_APP_PORT}/movies?cityName=${cityName}`);
+    console.log(movies, 'test')
     this.setState({ movies: movies.data, showCards: true });
+    console.log(movies, 'test')
   }
   catch(error) {
     this.setState(
@@ -95,10 +100,14 @@ class App extends React.Component {
             </tr>
           </tbody>
         </Table>
-        <Container>{this.state.showCards &&
-          <Weather weatherData={this.state.weather} cityName={this.state.name} />}</Container>
-        <Container>{this.state.showCards &&
-          <Movies moviesData={this.state.movies} cityName={this.state.name} />}</Container>
+        <div>
+          <Container>{this.state.showCards &&
+            <Weather weatherData={this.state.weather} cityName={this.state.name} />}</Container>
+        </div>
+        <div>
+          <Container>{this.state.showCards &&
+            <Movies moviesData={this.state.movies} cityName={this.state.name} />}</Container>
+        </div>
         <div>
           {
 

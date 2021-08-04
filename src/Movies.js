@@ -1,57 +1,51 @@
 import React from 'react';
-import { Card, ListGroup, ListGroupItem, Container } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 
-export class Movies extends React.Component {
+class Movies extends React.Component {
     render() {
-        return (
-            <div >
-                <Container
-                >
-                    <Card >
-                        <Card.Img
-                        />
-                        <Card.Body>
-                            <Card.Title>
-                                {this.props.title}
-                            </Card.Title>
-                            <Card.Text
 
-                            >
-                                {this.props.overview}
-                            </Card.Text>
+        return (
+            <div>
+                {this.props.moviesData.map((movie) => {
+                    return <Card style={{ width: '60%', float: 'right', margin: '5rem 14rem 1rem 2rem' }} className="text-center mb-3 bg-dark">
+                        <Card.Title className="p-3 text-white">Title: {movie.title}</Card.Title>
+                        <ListGroupItem>
+                            <Card.Img style={{ height: '20rem' }} src={movie.poster_path} fluid={true} alt="No image for this movie" />
+                        </ListGroupItem>
+                        <Card.Body className="bg-info" style={{ maxHeight: '10rem' }}>
+                            {movie.overview}
                         </Card.Body>
                         <ListGroup className="list-group-flush">
                             <ListGroupItem>
                                 Released On:{' '}
                                 <span>
-                                    {this.props.released_on}
+                                    {movie.release_date}
                                 </span>
                             </ListGroupItem>
                             <ListGroupItem>
                                 Popularity:{' '}
                                 <span>
-                                    {this.props.popularity}
+                                    {movie.popularity}
                                 </span>
                             </ListGroupItem>
                             <ListGroupItem>
                                 Average Votes:{' '}
                                 <span >
-                                    {this.props.average_votes}
+                                    {movie.vote_average}
                                 </span>
                             </ListGroupItem>
                             <ListGroupItem>
-                                Total Votes:{' '}
+                                Votes Count:{' '}
                                 <span >
-                                    {this.props.total_votes}
+                                    {movie.vote_count}
                                 </span>
                             </ListGroupItem>
+
                         </ListGroup>
                     </Card>
-                </Container>
-                <br />
+                })}
             </div>
-        );
+        )
     }
 }
-
 export default Movies;
