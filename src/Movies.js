@@ -7,7 +7,7 @@ class Movies extends React.Component {
         return (
             <div>
                 {this.props.moviesData.map((movie) => {
-                    return <Card style={{ width: '60%', float: 'right', margin: '5rem 14rem 1rem 2rem' }} className="text-center mb-3 bg-dark">
+                    return <Card style={{ width: '60%', float: 'right', margin: '2rem 14rem 1rem 2rem' }} className="text-center mb-3 bg-dark">
                         <Card.Title className="p-3 text-white">Title: {movie.title}</Card.Title>
                         <ListGroupItem>
                             <Card.Img style={{ height: '20rem' }} src={movie.poster_path} fluid={true} alt="No image for this movie" />
