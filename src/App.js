@@ -3,6 +3,7 @@ import { Form, Button, Table, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
 import Weather from './Weather'
+import Movies from './Movies'
 class App extends React.Component {
 
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends React.Component {
       lon: '',
       lat: '',
       weather: [],
+      movies: {},
       err: 'no response',
       showMap: false,
       showErr: false,
@@ -33,18 +35,32 @@ class App extends React.Component {
         showMap: true,
         showErr: false,
       })
-      const weather = await axios.get(`http://localhost:3001/weather?searchQuery=${cityName}`);
+      const weather = await axios.get(`${process.env.REACT_APP_SERVER_URL}/weather?searchQuery=${cityName}&lat=${locationResult.lat}&lon=${locationResult.lon}`
+      );
       this.setState({ weather: weather.data, showCards: true });
     }
     catch (error) {
       this.setState(
         {
           showErr: true,
-          err: `Error: ${error.response.status},${error.response.data.error}`,
+          err: `Error: ${error.response.status}, ${error.response.data.error}`,
           showCards: false,
         }
       )
     }
+    const movies = await axios.get(`${process.env.REACT_APP_MOVIES_URL}?cityName=${cityName}`
+    );
+    this.setState({ movies: movies.data, showCards: true });
+  }
+  catch(error) {
+    this.setState(
+      {
+        showErr: true,
+        err: `Error: ${error.response.status}, ${error.response.data.error}`,
+        showCards: false,
+      }
+    );
+
   };
   render() {
     return (
@@ -81,17 +97,18 @@ class App extends React.Component {
         </Table>
         <Container>{this.state.showCards &&
           <Weather weatherData={this.state.weather} cityName={this.state.name} />}</Container>
+        <Container>{this.state.showCards &&
+          <Movies moviesData={this.state.movies} cityName={this.state.name} />}</Container>
         <div>
           {
 
             this.state.showMap &&
             <img width="100%" style={{ maxHeight: "600px" }} src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_API_TOKEN}&center=${this.state.lat},${this.state.lon}`} alt='map' />
           }
-        </div>
+        </div >
         <div className='bg-danger text-white text-center' style={{ fontSize: '25px' }}>{this.state.showErr ? <p>{this.state.err}</p> : ''}</div>
-      </div>
+      </div >
     )
   }
 }
-
 export default App;
