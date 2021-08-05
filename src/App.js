@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
 import Weather from './Weather'
 import Movies from './Movies'
+import Restaurants from './Restaurants';
 class App extends React.Component {
 
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
       lat: '',
       weather: [],
       movies: [],
+      restaurants: [],
       err: 'no response',
       showMap: false,
       showErr: false,
@@ -38,12 +40,10 @@ class App extends React.Component {
     }
     catch { }
     try {
-      console.log(this.state.lat)
       const weather = await axios.get(`${process.env.REACT_APP_PORT}/weather?searchQuery=${cityName}&lat=${this.state.lat}&lon=${this.state.lon}`);
       this.setState({ weather: weather.data, showCards: true });
     }
     catch (error) {
-      console.log(error);
       this.setState(
         {
           showErr: true,
@@ -52,21 +52,34 @@ class App extends React.Component {
         }
       )
     }
-    const movies = await axios.get(`${process.env.REACT_APP_PORT}/movies?cityName=${cityName}`);
-    console.log(movies, 'test')
-    this.setState({ movies: movies.data, showCards: true });
-    console.log(movies, 'test')
-  }
-  catch(error) {
-    this.setState(
-      {
-        showErr: true,
-        err: `Error: ${error.response.status}, ${error.response.data.error}`,
-        showCards: false,
-      }
-    );
+    try {
+      const movies = await axios.get(`${process.env.REACT_APP_PORT}/movies?cityName=${cityName}`);
+      this.setState({ movies: movies.data, showCards: true });
+    }
+    catch (error) {
+      this.setState(
+        {
+          showErr: true,
+          err: `Error: ${error.response.status}, ${error.response.data.error}`,
+          showCards: false,
+        }
+      )
+    }
+    try {
+      const restaurants = await axios.get(`${process.env.REACT_APP_PORT}/restaurant?cityName=${cityName}`)
+      this.setState({ restaurants: restaurants.data, showCards: true });
+    }
+    catch (error) {
+      this.setState(
+        {
+          showErr: true,
+          err: `Error: ${error.response.status}, ${error.response.data.error}`,
+          showCards: false,
+        }
+      );
 
-  };
+    };
+  }
   render() {
     return (
       <div className="container" style={{ marginTop: "10px" }}>
@@ -117,6 +130,11 @@ class App extends React.Component {
         <div>
           <Container>{this.state.showCards &&
             <Movies moviesData={this.state.movies} cityName={this.state.name} />}</Container><br /> <br /> <br />
+        </div>
+        <div className="bg-secondary text-white p-1 text-center"><h5>Restaurants List</h5></div>
+        <div>
+          <Container>{this.state.showCards &&
+            <Restaurants restaurantData={this.state.restaurants} cityName={this.state.name} />}</Container><br /> <br /> <br />
         </div>
         <div className='bg-danger text-white text-center' style={{ fontSize: '25px' }}>{this.state.showErr ? <p>{this.state.err}</p> : ''}</div>
       </div >
