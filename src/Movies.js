@@ -10,9 +10,11 @@ class Movies extends Component {
                 <section>
                     {this.props.moviesData.length && <h2 className="text-center text-dark mb-5">Movies Related To The City</h2>}
                     <Container className="d-flex flex-wrap justify-content-center">
-                        {this.props.moviesData.map(movieObj => {
+                        {this.props.moviesData.map((movieObj, idx) => {
                             return (
-                                <Movie moviesData={movieObj} />
+                                <Movie
+                                    moviesData={movieObj}
+                                    key={idx} />
                             );
                         })}
                     </Container>

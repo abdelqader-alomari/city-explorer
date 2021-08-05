@@ -9,7 +9,7 @@ class Movie extends React.Component {
                 <Card style={{ width: '38rem', float: 'right', margin: '2rem 4rem 1rem 2rem' }} className="text-center mb-3 bg-dark">
                     <Card.Title className="p-3 text-white">Title: {this.props.moviesData.title}</Card.Title>
                     <ListGroupItem>
-                        <Card.Img style={{ height: '20rem' }} src={this.props.moviesData.poster_path} fluid={true} alt="No image for this movie" />
+                        <Card.Img style={{ height: '20rem' }} src={this.props.moviesData.poster_path} fluid="true" alt="No image for this movie" />
                     </ListGroupItem>
                     <Card.Body className="bg-info" style={{ maxHeight: '10rem' }}>
                         {this.props.moviesData.overview}
