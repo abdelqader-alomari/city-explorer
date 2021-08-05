@@ -38,12 +38,10 @@ class App extends React.Component {
     }
     catch { }
     try {
-      console.log(this.state.lat)
       const weather = await axios.get(`${process.env.REACT_APP_PORT}/weather?searchQuery=${cityName}&lat=${this.state.lat}&lon=${this.state.lon}`);
       this.setState({ weather: weather.data, showCards: true });
     }
     catch (error) {
-      console.log(error);
       this.setState(
         {
           showErr: true,
@@ -53,9 +51,8 @@ class App extends React.Component {
       )
     }
     const movies = await axios.get(`${process.env.REACT_APP_PORT}/movies?cityName=${cityName}`);
-    console.log(movies, 'test')
     this.setState({ movies: movies.data, showCards: true });
-    console.log(movies, 'test')
+    // console.log(movies, 'test')
   }
   catch(error) {
     this.setState(
