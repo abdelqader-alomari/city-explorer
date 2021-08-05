@@ -105,8 +105,8 @@ class App extends React.Component {
               <td>{this.state.lon}</td>
               <td>{this.state.lat}</td>
             </tr>
-          </tbody> <br />
-        </Table>
+          </tbody>
+        </Table><br />
         <div className="bg-secondary text-white p-1 text-center"><h5>Weather Data</h5></div>
         <div>
           <Container>{this.state.showCards &&
